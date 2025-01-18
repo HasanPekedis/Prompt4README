@@ -1,6 +1,6 @@
 import os
 
-prompt = """
+prompt = f"""
 You are an expert technical writer skilled in creating professional README files for software projects. Write a comprehensive README file for the following project:
 
 Project Details:
@@ -11,9 +11,10 @@ Features: [List the key features or functionalities of the project.]
 Technologies Used: [Mention the technologies, frameworks, and tools used in the project.]
 Installation Instructions: [Provide step-by-step instructions for setting up and running the project.]
 Usage: [Include examples or details on how to use the project.]
-Contributing: [Explain how others can contribute to the project.]
-License: [Specify the license for the project, if any.]
-Contact Information: [Provide your contact details for any questions or feedback.]
+You will use this code parts to create the code prompt part of the README file:
+
+{merged_code_parts}
+
 Requirements:
 
 Use clear and concise language that is easy to understand.
@@ -110,30 +111,30 @@ def create_code_prompt_part(matching_files):
     for file_path in matching_files:
         try:
             with open(file_path, 'r', encoding='utf-8') as f:
-                print(f"--- Content of {file_path} ---")
-                print(f.read())  # Read and print the content of the file
-                print("\n")
+
+                code_propmt = f"""There is file in {file_path} and it contains the following code:  
+                    {f.read()}
+                \n"""
+
+                code_propmts.append(code_propmt)
+
         except Exception as e:
             print(f"Could not read file {file_path}: {e}")
 
-        code_prompt = f""" There is file in {file_path} and it contains the following code:"""
-
-        code_propmts.append(code_prompt)
 
         
+    if __name__ == "__main__":
+        
+        current_directory = os.getcwd()
+        
+        explore_files(current_directory)
+
+        create_code_prompt_part(matching_files)
+
+        print(current_directory)
+
+        print(matching_files)
+
+        print(code_propmts)
 
 
-
-
-
-# Explore the current directory
-current_directory = os.getcwd()
-explore_files(current_directory)
-
-create_code_prompt_part(matching_files)
-
-print(current_directory)
-
-print(matching_files)
-
-print(code_propmts)
