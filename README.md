@@ -83,7 +83,5 @@ This format ensures that the code is well-documented and easy to reference.
 
 ---
 
-Feel free to contribute to the project by submitting issues or pull requests. For more information, please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file.
-
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
