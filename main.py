@@ -69,25 +69,23 @@ Project Details:
 
 Project Name: [Your Project Name]
 Description: [Provide a brief description of what the project does and its purpose.]
+Table of Contents: [A list of sections in the README, making it easier to navigate.]
 Features: [List the key features or functionalities of the project.]
 Technologies Used: [Mention the technologies, frameworks, and tools used in the project.]
-Installation Instructions: [Provide step-by-step instructions for setting up and running the project.]
+Installation Instructions: [Provide step-by-step instructions for setting up and running the project.][Make sure you understand how project runs]
+Configuration: [optional][Information on any configuration settings, environment variables, or setup steps that need to be done before running the project.]
 Usage: [Include examples or details on how to use the project.]
 
 You will use this code parts to create the code prompt part of the README file:
 
 {''.join(code_prompts)}
-
-
 Requirements:
-Name of project is folder name of project.
+The project name should match the folder name of the project.
 Use given code and understand project details.
 Use clear and concise language that is easy to understand.
 Include headings and subheadings for organization.
 Format the README using Markdown syntax (e.g., #, ##, ### for headers, and lists for steps or features).
 Add placeholders where necessary (e.g., <placeholder> or [Your Text Here]).
-Provide a sample table of contents if the README is lengthy.
-
 """
     
 if __name__ == "__main__":
