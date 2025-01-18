@@ -1,5 +1,9 @@
 import os
-import pyperclip
+import argparse
+
+parser = argparse.ArgumentParser(description="Optional arguments.")
+parser.add_argument("--path", type=str, help="Path of the project.")
+args = parser.parse_args()
 
 
 prompt = ""
@@ -26,12 +30,9 @@ language_file_types = [
     ".dart",  # Dart
     ".ts",  # TypeScript
     ".js",  # JavaScript
+    ".txt",  # text
 
 ]
-
-
-
-
 
 # Function to explore files recursively
 def explore_files(directory):
@@ -51,7 +52,7 @@ def create_code_prompt_part(matching_files):
         try:
             with open(file_path, 'r', encoding='utf-8') as f:
 
-                code_prompt = f"""###There is file in {file_path} and it contains the following code:  
+                code_prompt = f"""###There is file in {file_path} and it contains the following code:
                     {f.read()}
                 \n"""
 
@@ -62,8 +63,7 @@ def create_code_prompt_part(matching_files):
 
 def update_prompt():
     global prompt
-    prompt = f"""
-You are an expert technical writer skilled in creating professional README files for software projects. Write a comprehensive README file for the following project:
+    prompt = f"""You are an expert technical writer skilled in creating professional README files for software projects. Write a comprehensive README file for the following project:
 
 Project Details:
 
@@ -91,20 +91,23 @@ Provide a sample table of contents if the README is lengthy.
 """
     
 if __name__ == "__main__":
-    
-    current_directory = os.getcwd()
-    
+        
+    if args.path:
+        current_directory = args.path
+    else:
+        current_directory = os.getcwd()
+
+    project_name = current_directory.split("/")[-1]
+
+
     matching_files = explore_files(current_directory)
 
     create_code_prompt_part(matching_files)
 
     update_prompt()
-
-    # Copy the string to the clipboard
-    pyperclip.copy(prompt)
     
     # Open the file in write mode
-    with open("example.txt", "w", encoding="utf-8") as file:
+    with open(f"prompt_{project_name}.txt", "w", encoding="utf-8") as file:
         file.write(prompt)  # Write the string to the file
 
 
